@@ -1,0 +1,150 @@
+/* ■■■■■ ПОПАПЫ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+.popup {
+    --popup-tr-dur: 300ms;
+    --popup-backdrop-color: hsla(200, 50%, 0%, 0.6);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    padding: 2em;
+    @include adaptive-value(font-size, 22, 16, 3);
+    background-color: var(--popup-backdrop-color);
+    transition: var(--popup-tr-dur) ease;
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    &--open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        // можно добавить эффект размытия backdrop-фона (поддержка неполная, поэтому в блоке @supports)
+        // @supports (backdrop-filter: blur(5px)) {
+        //     backdrop-filter: blur(5px) saturate(0%);
+        // }
+
+        // вкл если есть transform-анимация попапа
+        // .popup__body {
+        //     transform: none;
+        // }
+    }
+
+
+    // .popup__body
+    &__body {
+        --popup-body-bg-color: #fff;
+
+        position: relative;
+
+        max-height: 100%;
+        max-width: 55ch;
+        padding: 1em;
+
+        background-color: var(--popup-body-bg-color);
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        cursor: initial;
+
+
+        // можно дополнительно стилизовать блок попапа тенью позади
+        box-shadow: 0 0 10em hsla(200, 50%, 50%, 1);
+
+        // вкл, если хочешь анимировать трансформацию попапа
+        // transform: perspective(1000px) translateX(100%) rotateZ(90deg);
+        // transition: transform var(--popup-tr-dur) ease;
+
+        // // *** Scrollbar styling (опционально) ***
+        // // для Firefox
+        // @supports (scrollbar-width: thin) and (scrollbar-color: black white) {
+        //     scrollbar-width: thin;
+        //     scrollbar-color: hsl(200, 0%, 10%) var(--popup-body-bg-color);
+        // }
+        // // для Webkit browsers
+        // &::-webkit-scrollbar {
+        //     width: 0.4em;
+        // }
+        // &::-webkit-scrollbar-thumb {
+        //     background-color: hsl(200, 0%, 10%);
+        // }
+        // &::-webkit-scrollbar-track {
+        //     background-color: var(--popup-body-bg-color);
+        // }
+    }
+
+
+    // .popup__content
+    &__content {
+        > *:not(:last-child) {
+            margin-bottom: 1.3rem;
+        }
+        picture {
+            img {
+                width: 100%;
+            }
+        }
+    }
+    // .popup__title
+    &__title {
+        padding-right: 1.28em;
+
+        text-transform: uppercase;
+        font-size: 2.2em;
+        font-weight: 500;
+        color: hsl(0, 50%, 50%);
+    }
+    // .popup__text
+    &__text {
+        line-height: 1.5;
+    }
+
+
+    &__close-btn {
+        --popup-close-btn-size: 2.4em;
+
+        --popup-close-btn-bg-hue: 0;
+        --popup-close-btn-bg-saturation: 75%;
+        --popup-close-btn-bg-lightness: 50%;
+
+        --popup-close-btn-cross-color: #fff;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: var(--popup-close-btn-size);
+        aspect-ratio: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: hsl(var(--popup-close-btn-bg-hue), var(--popup-close-btn-bg-saturation), var(--popup-close-btn-bg-lightness));
+        transition: 100ms ease;
+        
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: hsl(var(--popup-close-btn-bg-hue), var(--popup-close-btn-bg-saturation), calc(var(--popup-close-btn-bg-lightness) - 5%));
+            }
+        }
+
+        svg {
+            width: calc(var(--popup-close-btn-size) / 2.2);
+            aspect-ratio: 1;
+            fill: var(--popup-close-btn-cross-color);
+            pointer-events: none;
+        }
+    }
+}

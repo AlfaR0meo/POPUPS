@@ -1,0 +1,74 @@
+// ■■■■■ ШРИФТЫ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./fonts";
+// ■■■■■ ПЕРЕМЕННЫЕ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./vars";
+// ■■■■■ МИКСИНЫ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./mixins";
+// ■■■■■ ОБНУЛЯЮЩИЕ СТИЛИ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./reset";
+// ■■■■■ БАЗОВЫЕ СТИЛИ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./base";
+// ■■■■■ ПОПАПЫ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+@import "./popups";
+/* ■■■■■ СТИЛИ САЙТА ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+:root {
+    --i: calc(1vw + 1vh);
+}
+.page-wrapper {
+    padding: 1rem;
+    height: 200vh; // создаю искусственный скролл
+}
+
+.block {
+    display: grid;
+    gap: 1em;
+
+    max-width: 50ch;
+    padding: 1em;
+
+    @include adaptive-value(font-size, 22, 16, 3);
+    color: #000;
+    background-color: #eee; 
+
+    // .block__title
+    &__title {
+        font-size: 2.2em;
+        font-weight: 500;
+        color:hsl(0, 50%, 50%);
+    }
+    // .block__image
+    &__image {
+        img {
+            width: 100%;
+        }
+    }
+    // .block__text
+    &__text {
+        line-height: 1.5;
+    }
+    // .block__actions
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+    // .block__button
+    &__button {
+        width: fit-content;
+        padding: 1em;
+
+        font-weight: 500;
+        color: #fff;
+
+        background-color: hsl(200, 75%, 50%);
+        transition: 100ms;
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: hsl(200, 75%, 45%);
+            }
+        }
+        &:focus-visible {
+            outline: 0.25em solid red;
+        }
+    }
+}
